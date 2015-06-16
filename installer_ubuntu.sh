@@ -13,3 +13,6 @@ cd yp-spur
 make
 sudo make install
 sudo ldconfig
+
+
+mkdir log
