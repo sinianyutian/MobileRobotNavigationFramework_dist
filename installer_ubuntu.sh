@@ -2,7 +2,7 @@ sudo add-apt-repository ppa:joseluisblancoc/mrpt
 sudo apt-get update
 sudo apt-get install libmrpt-dev mrpt-apps  
 sudo apt-get install libsfml-dev
-sudo apt-get build-dev libsfml
+sudo apt-get build-dep libsfml
 
 #wget http://www.sfml-dev.org/files/SFML-2.3-linux-gcc-64-bit.tar.gz
 #tar zxfv SFML-2.3-linux-gcc-64-bit.tar.gz
