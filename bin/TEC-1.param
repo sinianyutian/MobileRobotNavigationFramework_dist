@@ -9,7 +9,7 @@
 	MOTOR_PHASE	0.00000000 #DC
         RADIUS[0]       0.03225000 #[m]
         RADIUS[1]      -0.03225000 #[m]
-           TREAD       -0.3455 #[m]
+           TREAD       0.3455 #[m]
    CONTROL_CYCLE       0.02000000 #[s]
          MAX_VEL       0.9 #[m/s]
            MAX_W       3.14 #[rad/s]
