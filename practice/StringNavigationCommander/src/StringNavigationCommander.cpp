@@ -135,7 +135,7 @@ RTC::ReturnCode_t StringNavigationCommander::onExecute(RTC::UniqueId ec_id)
 	// 文字列コマンドを取得
 	if (m_commandIn.isNew()) {
 		m_commandIn.read(); // m_commandにデータが格納される
-		std::string data = m_command.data; // string型に変換
+		std::string data = (char*)m_command.data; // string型に変換
 		std::cout << "[RTC::StringCommander] Receive Command (" << data << ")" << std::endl;
 			
 		// Goalを設定する
@@ -161,7 +161,7 @@ RTC::ReturnCode_t StringNavigationCommander::onExecute(RTC::UniqueId ec_id)
 		// マップを要求する
 		RTC::OGMap_var outMap; // マップを格納するための変数
 		RTC::RETURN_VALUE retval = this->m_OGMapServer._ptr()->requestCurrentBuiltMap(outMap);
-		if (retval == RTC::RETURN_VALUE::RETVAL_OK) {
+		if (retval == RTC::RETVAL_OK) {
 			std::cout << "[RTC::StringCommander] Map Request OK." << std::endl;
 		} else {
 			std::cout << "[RTC::StringCommander] Map Request Unknown Error Code =" << retval << std::endl;
@@ -179,9 +179,9 @@ RTC::ReturnCode_t StringNavigationCommander::onExecute(RTC::UniqueId ec_id)
 		param.timeLimit.sec = 9999; param.timeLimit.nsec = 0; // 許容時間
 		RTC::Path2D_var outPath; // 軌道を格納するための変数
 		retval = m_pathPlanner._ptr()->planPath(param, outPath);
-		if (retval == RTC::RETURN_VALUE::RETVAL_OK) { // 成功
+		if (retval == RTC::RETVAL_OK) { // 成功
 			std::cout << "[RTC::StringCommander] Path Plan OK." << std::endl;
-		} else if (retval == RTC::RETURN_VALUE::RETVAL_NOT_FOUND) { // 見つからない (通常終了)
+		} else if (retval == RTC::RETVAL_NOT_FOUND) { // 見つからない (通常終了)
 			std::cout << "[RTC::StringCommander] Path Plan No Path Found" << std::endl;
 			return RTC::RTC_OK;
 		} else {
@@ -191,7 +191,7 @@ RTC::ReturnCode_t StringNavigationCommander::onExecute(RTC::UniqueId ec_id)
 
 		// 軌道追従を要求．終了するまでfollowPathはブロックする
 		retval = m_pathFollower._ptr()->followPath(outPath);
-		if (retval == RTC::RETURN_VALUE::RETVAL_OK) { // 成功
+		if (retval == RTC::RETVAL_OK) { // 成功
 			std::cout << "[RTC::StringCommander] Follow OK." << std::endl;
 		} else { // 失敗も通常終了
 			std::cout << "[RTC::StringCommander] Follow Unknown Error Code =" << retval << std::endl;
